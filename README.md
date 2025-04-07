@@ -13,5 +13,5 @@ O sistema modela uma plataforma colaborativa para controle de acesso a repositó
 - Fabiano Victor de França Araújo
 - Mirelle Maria de Oliveira Rocha
 - Ana Lívia Costa Celestino Santos
-- Lucas
+- Lucas André Monteiro Sousa
 
