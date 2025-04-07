@@ -52,7 +52,7 @@ assert usuarioAcessaApenasRepositorioDeOrganizacao {
     not some u: Usuario | some r: u.repositoriosUsuarioAcessa | r.organizacao != u.organizacao
 }
 // Verifica que todos os repositorios estao vinculados a uma organizacao
-// Validacao adicional para explicitat a regra
+// Validacao adicional para explicitar a regra
 assert repositorioPossuiOrganizacao { 
 	not some r: Repositorio | no r.organizacao 
 }
