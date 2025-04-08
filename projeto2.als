@@ -1,9 +1,5 @@
-// esse codigo modela um sistema de controle de acesso a repositorios 
-// em uma plataforma colaborativa
-
 module SistemaControleAcesso
 
-// Definicao de uma organizacao
 sig Organizacao{}
 
 
@@ -13,13 +9,14 @@ sig Repositorio{
 	organizacao: one Organizacao
 }
 
-// Definicao de um  usuario que pertence a uma unica organizacao 
+// Definicao de um  usuario que pertence a uma unica organizacao ou a nenhuma
 sig Usuario{
-	organizacao: one Organizacao,
-	// relacao - acessa - indica os repositorios que o usuario pode acessar
+	organizacao: lone Organizacao,
+	// relacao - acessa - indica os repositorios que o usuario acessa
 	acessa: set Repositorio
 }
 // -- Fatos --- 
+
 //  Esse fato controla a especificacao: usuarios so podem acessar repositorios da mesma organizacao
 fact controleAcessoUsuario{
 	all u: Usuario | all r: repositoriosUsuarioAcessa[u] | r.organizacao = u.organizacao
@@ -56,6 +53,8 @@ assert usuarioAcessaApenasRepositorioDeOrganizacao {
 assert repositorioPossuiOrganizacao { 
 	not some r: Repositorio | no r.organizacao 
 }
+
+// ---- Cenarios de Execucao ----
 run{
     #Usuario >= 2
     #Repositorio >= 5
