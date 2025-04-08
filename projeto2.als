@@ -31,7 +31,6 @@ pred participaMaxCincoRepositorios[u:Usuario] {
 	#repositoriosUsuarioAcessa[u] <=5
 }
 
-
 // ---- Funcoes ----
 // Funcao que retorna os repositorios acessiveis por um usuario
 fun repositoriosUsuarioAcessa[u:Usuario]: set Repositorio {
