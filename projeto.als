@@ -7,7 +7,7 @@ sig Repositorio {
 }
 
 sig Usuario {
-    organizacao: one Organizacao,
+    organizacao: lone Organizacao,
     acessa: set Repositorio 
 }
 
