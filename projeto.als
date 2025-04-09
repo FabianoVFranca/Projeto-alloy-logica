@@ -28,18 +28,13 @@ fact limiteParticipacaoDev {
     all d: Dev | #d.participa <= 5
 }
 
-fact devAcessaApenasOndeParticipa {
-    all d: Dev | d.acessa in d.participa
-}
-
-
-
 
 run {
-    #Usuario >= 3       
+    #Usuario >= 3         
     #Dev >= 1           
     #(Usuario - Dev) >= 1  
-    #Repositorio >= 5
-    #Organizacao > 1
-    some participa      
-} for 10 but 5 Organizacao
+    #Repositorio >= 5     
+    #Organizacao >= 2      
+    some d: Dev | some d.participa  // Algum Dev participa de pelo menos 1 repositorio
+} for 5 but 5 Organizacao
+
