@@ -71,7 +71,7 @@ assert devAcessaApenasRepositorioDeOrganizacao {
 assert devParticipaApenasRepositorioDeOrganizacao {
     not some d: Dev | some r: d.repositoriosParticipa | r.organizacao != d.organizacao
 }
-// Verifica se todos Repositorios que o Dev acessa todos Repositorios que participa
+// Verifica se o Dev acessa todos Repositorios que participa
 assert devParticipaApenasRepositorioQueAcessa {
     not some d: Dev | some r: d.repositoriosParticipa | r not in d.repositoriosAcessa
 }
