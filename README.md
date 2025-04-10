@@ -10,6 +10,12 @@ Este projeto modela, utilizando Alloy, uma plataforma colaborativa para controle
 - Desenvolvedores (`Usuários que trabalham`) podem participar de **no máximo cinco repositórios** dentro de sua organização.
 - Quando um desenvolvedor trabalha em um repositório ele também **acessa** esse repositório.
 
+## 📌 Expansão para Múltiplos Sistemas
+- O modelo Alloy do projeto2 representa um sistema único de controle de acesso a repositórios dentro de uma plataforma colaborativa, como GitHub ou GitLab.
+- Ele garante que cada usuário e repositório estejam vinculados a uma única organização, respeitando regras de isolamento e acesso interno, especificadas acima.
+- **No entanto**, o modelo pode ser facilmente expandido para um contexto onde múltiplos sistemas coexistam independentemente, representada por projeto3.
+- Essa ideia surgiu ao longo das reuniões do grupo para executar o projeto, e decidimos desenvolver também esse cenário com múltiplos sistemas.
+
 ## 👥 Integrantes do Grupo
 
 - Ana Lívia Costa Celestino Santos  
