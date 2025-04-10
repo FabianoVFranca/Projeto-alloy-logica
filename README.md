@@ -1,6 +1,6 @@
 # Projeto Alloy — Lógica para Computação
 
-Este projeto modela, utilizando Alloy, uma plataforma colaborativa para controle de acesso a repositórios de código, com foco na consistência de regras de organização e permissões de usuários.
+Este projeto modela, utilizando Alloy, um sistema simples de controle de acesso a repositórios de código em uma plataforma colaborativa, com foco na consistência de regras de organização e permissões de usuários.
 
 ## 🧩 Principais Especificações do Sistema
 
