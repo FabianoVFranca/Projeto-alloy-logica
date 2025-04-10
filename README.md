@@ -11,9 +11,9 @@ Este projeto modela, utilizando Alloy, um sistema simples de controle de acesso 
 - Quando um desenvolvedor trabalha em um repositório ele também **acessa** esse repositório.
 
 ## 📌 Expansão para Múltiplos Sistemas
-- O modelo Alloy do projeto2 representa um sistema único de controle de acesso a repositórios dentro de uma plataforma colaborativa, como GitHub ou GitLab.
+- O modelo Alloy do `projetoAlloySistemaUnico` representa um sistema único de controle de acesso a repositórios dentro de uma plataforma colaborativa, como GitHub ou GitLab.
 - Ele garante que cada usuário e repositório estejam vinculados a uma única organização, respeitando as regras de isolamento e acesso interno, especificadas acima.
-- **No entanto**, o modelo pode ser facilmente expandido para um contexto onde múltiplos sistemas coexistam independentemente, representado por projeto3.
+- **No entanto**, o modelo pode ser facilmente expandido para um contexto onde múltiplos sistemas coexistam independentemente, representado por `projetoAlloySistemasMultiplos`.
 - Essa ideia surgiu ao longo das reuniões do grupo para executar o projeto, e decidimos desenvolver também esse cenário com múltiplos sistemas.
 
 ## 👥 Integrantes do Grupo
