@@ -7,34 +7,34 @@ sig Organizacao {
 }
 
 sig Repositorio {
-	// Repositorios sao sempre gerenciados dentro de uma unica organizacao
+	// Repositorios sao sempre gerenciados dentro de uma unica Organizacao
     	organizacao: one Organizacao
 }
 
 sig Usuario {
-	// Usuario pode pertencer a uma unica organizacao ou a nenhuma
+	// Usuario pode pertencer a uma unica Organizacao ou a nenhuma
     	organizacao: lone Organizacao,
 	perteceASistema: one Sistema,
-	// Subconjunto que indica os repositorios que o usuario acessa
+	// Subconjunto que indica os Repositorios que o Usuario acessa
    	acessa: set Repositorio,
-	//  Subconjunto que indica os repositorios que o usuario trabalha
+	//  Subconjunto que indica os Repositorios que o Usuario trabalha
     	trabalha: set Repositorio 
 }
 
 // -- Fatos --- 
 
-//  Esse fato controla a especificacao: "usuarios so podem acessar repositorios da mesma organizacao"
+//  Esse fato controla a especificacao: "Usuarios so podem acessar Repositorios da mesma Organizacao"
 fact controleAcesso {
     all u: Usuario | all r: u.acessa | r.organizacao = u.organizacao
     all u: Usuario | all r: u.trabalha | r.organizacao = u.organizacao
 }
 
-// Esse fato controla a especificacao: "desenvolverdor participa ativamente de no maximo cinco repositorios"
+// Esse fato controla a especificacao: "Dev participa ativamente de no maximo cinco Repositorios"
 fact limiteDeRepositoriosDeTrabalho {
 	all u: Usuario | devparticipaMaxCincoRepositorios[u]
 }
 
-// Se um usuario trabalha em um repositorio, ele obrigatoriamente tambem deve acessa-lo
+// Se um usuario trabalha em um Repositorio, ele obrigatoriamente tambem deve acessa-lo
 fact usarioTrabalhaEAcessa {
 	all u: Usuario | u.trabalha in u.acessa
 }
@@ -51,7 +51,7 @@ fact isolamentoEntreSistemas {
 }
 
 
-// Predicado que verifica se um desenvolvedor esta dentro do limite de acesso a repositorios
+// Predicado que verifica se um Dev esta dentro do limite de acesso a Repositorios
 pred devparticipaMaxCincoRepositorios[u: Usuario] {
 	 #u.trabalha <= 5
 }
@@ -59,19 +59,19 @@ pred devparticipaMaxCincoRepositorios[u: Usuario] {
 
 // ---- Asserts ----
 
-// Verifica que todos os desenvolvedores respeitam o limite de participacao
+// Verifica que todos os Devs respeitam o limite de participacao
 assert verificaLimiteAcessoDev {
 	all u: Usuario | devparticipaMaxCincoRepositorios[u]
 }
-// Verifica se todos repositorios acessados pelo usuario sao da sua organizacao
+// Verifica se todos Repositorios acessados pelo Usuario sao da sua Organizacao
 assert usuarioAcessaApenasRepositorioDeOrganizacao {
     not some u: Usuario | some r: u.acessa | r.organizacao != u.organizacao
 }
-// Verifica se todos os usuarios trabalham apenas em repositorios da sua organização
+// Verifica se todos os Usuarios trabalham apenas em Repositorios da sua Organização
 assert usuarioTrabalhaApenasRepositorioDeOrganizacao {
     not some u: Usuario | some r: u.trabalha | r.organizacao != u.organizacao
 }
-// Verifica se todos os repositorios estao vinculados a uma organizacao
+// Verifica se todos os Repositorios estao vinculados a uma Organizacao
 assert repositorioPossuiOrganizacao { 
 	not some r: Repositorio | no r.organizacao 
 }
@@ -92,6 +92,17 @@ assert sistemasCorretamenteIsolados {
         r.organizacao.compoeUmSistema != u.perteceASistema
 }
 
+//Verifica se nenhum Usuario acessa Repositorio de outra Organizacao
+assert usuarioNaoAcessaRepositorioDeOutraOrganizacao {
+	all u: Usuario | all r: u.acessa | r.organizacao = u.organizacao
+}
+
+//Verifica se Usuarios que nao sao Devs nao tem Repositorios em trabalha
+assert somenteDevsTrabalham {
+	all u: Usuario - Dev | no r: Repositorio | r in no u.trabalha
+}
+
+
 pred exemplo {
     #Usuario >= 3
     #Repositorio >= 5
@@ -105,3 +116,7 @@ check verificaLimiteAcessoDev for 5
 check acessosDentroDaOrganizacao for 5
 check participacaoDentroDaOrganizacao for 5
 check sistemasCorretamenteIsolados for 5
+check usuarioNaoAcessaRepositorioDeOutraOrganizacao for 5
+check somenteDevsTrabalham for 5
+
+
