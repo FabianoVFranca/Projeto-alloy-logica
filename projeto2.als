@@ -13,15 +13,17 @@ sig Usuario {
 	// Subconjunto que indica os repositorios que o usuario acessa
 	acessa: set Repositorio,
 	//  Subconjunto que indica os repositorios que o usuario trabalha
-      trabalha: set Repositorio  
+        trabalha: set Repositorio  
 }
 
 // -- Fatos --- 
+
 //  Esse fato controla a especificacao: "usuarios so podem acessar repositorios da mesma organizacao"
 fact controleAcesso {
-    all u: Usuario | all r: u.acessa | r.organizacao = u.organizacao     
-    all u : Usuario | all r: u.trabalha | r.organizacao = u.organizacao
+	all u: Usuario | all r: u.acessa | r.organizacao = u.organizacao     
+	all u : Usuario | all r: u.trabalha | r.organizacao = u.organizacao
 }
+
 // Esse fato controla a especificacao: "desenvolverdor participa ativamente de no maximo cinco repositorios"
 fact limiteDeRepositoriosDeTrabalho {
 	all u: Usuario | devparticipaMaxCincoRepositorios[u]
