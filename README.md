@@ -2,7 +2,7 @@
 
 Este projeto modela, utilizando Alloy, uma plataforma colaborativa para controle de acesso a repositórios de código, com foco na consistência de regras de organização e permissões de usuários.
 
-## 🧩 Especificações do Sistema
+## 🧩 Principais Especificações do Sistema
 
 - Cada repositório pertence **exclusivamente** a uma organização.
 - Cada usuário pode pertencer a **uma única organização** ou a **nenhuma**.
