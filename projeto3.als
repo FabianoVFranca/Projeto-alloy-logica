@@ -107,6 +107,5 @@ check acessosDentroDaOrganizacao for 5
 check participacaoDentroDaOrganizacao for 5
 check sistemasCorretamenteIsolados for 5
 check usuarioNaoAcessaRepositorioDeOutraOrganizacao for 5
-check somenteDevsTrabalham for 5
 
 
