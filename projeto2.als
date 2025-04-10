@@ -17,7 +17,7 @@ sig Usuario {
 // Isso significa que Dev e um tipo especifico de Usuario
 sig Dev extends Usuario {
     // Desenvolvedor participa de repositorios
-    participa: set Repositorio  
+    trabalha: set Repositorio  
 }
 
 // -- Fatos --- 
@@ -25,7 +25,7 @@ sig Dev extends Usuario {
 //  Esse fato controla a especificacao: "usuarios so podem acessar repositorios da mesma organizacao"
 fact controleAcesso {
     all u: Usuario | all r: u.acessa | r.organizacao = u.organizacao     
-    all d: Dev | all r: d.participa | r.organizacao = d.organizacao
+    all d: Dev | all r: d.trabalha | r.organizacao = d.organizacao
 }
 // Esse fato controla a especificacao: "desenvolverdor participa ativamente de no maximo cinco repositorios"
 fact limiteDeParticipacaoDev {
@@ -36,7 +36,7 @@ fact limiteDeParticipacaoDev {
 // ---- Predicados ----
 // Predicado que verifica se um desenvolvedor esta dentro do limite de acesso a repositorios
 pred devparticipaMaxCincoRepositorios[d:Dev] {
-	 #d.participa <= 5
+	 #d.trabalha <= 5
 }
 
 // ---- Asserts ----
@@ -58,7 +58,7 @@ assert devAcessaApenasRepositorioDeOrganizacao {
 }
 // Verifica se todos Repositorios que o Dev participa sao da sua Organizacao
 assert devParticipaApenasRepositorioDeOrganizacao {
-    not some d: Dev | some r: d.participa | r.organizacao != d.organizacao
+    not some d: Dev | some r: d.trabalha | r.organizacao != d.organizacao
 }
 
 pred exemplo {
@@ -67,7 +67,7 @@ pred exemplo {
     #(Usuario - Dev) >= 1  
     #Repositorio >= 5     
     #Organizacao >= 2      
-    some d: Dev | some d.participa  // Algum Dev participa de pelo menos 1 repositorio
+    some d: Dev | some d.trabalha  // Algum Dev participa de pelo menos 1 repositorio
 }
 
 run exemplo for 5
