@@ -1,4 +1,4 @@
-module SistemaControleAcesso
+module projetoAlloySistemaUnico
 
 sig Organizacao {}
 
