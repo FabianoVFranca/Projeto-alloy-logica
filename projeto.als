@@ -1,6 +1,10 @@
 module SistemaControleAcesso
 
-sig Organizacao {}
+sig Sistema {}
+
+sig Organizacao {
+    compoeUmSistema: one Sistema
+}
 
 sig Repositorio {
     organizacao: one Organizacao
@@ -8,33 +12,67 @@ sig Repositorio {
 
 sig Usuario {
     organizacao: lone Organizacao,
-    acessa: set Repositorio 
+    acessa: set Repositorio,
+    PerteceASistema: one Sistema,
+    participa: set Repositorio 
 }
-
-sig Dev extends Usuario {
-    participa: set Repositorio  
-}
-
 
 fact controleAcesso {
-    all u: Usuario | all r: u.acessa | 
-        r.organizacao = u.organizacao
-        
-    all d: Dev | all r: d.participa |
-        r.organizacao = d.organizacao
+    all u: Usuario | all r: u.acessa | r.organizacao = u.organizacao
+    all u: Usuario | all r: u.participa | r.organizacao = u.organizacao
+    
+   
 }
 
-fact limiteParticipacaoDev {
-    all d: Dev | #d.participa <= 5
+fact limiteDeParticipacao {
+    all u: Usuario | #u.participa <= 5
+}
+
+fact isolamentoEntreSistemas {
+    all u: Usuario | all r: u.acessa |
+        r.organizacao.compoeUmSistema = u.PerteceASistema
+    
+    all u: Usuario | all r: u.participa |
+        r.organizacao.compoeUmSistema = u.PerteceASistema
+    
+    all u: Usuario | some u.organizacao implies
+        u.organizacao.compoeUmSistema = u.PerteceASistema
+}
+
+// ---- Asserts ----
+assert verificaLimiteParticipacao {
+    all u: Usuario | #u.participa <= 5
+}
+
+assert acessosDentroDaOrganizacao {
+    not some u: Usuario | some r: u.acessa | r.organizacao != u.organizacao
+}
+
+assert participacaoDentroDaOrganizacao {
+    not some u: Usuario | some r: u.participa | r.organizacao != u.organizacao
+}
+
+assert sistemasCorretamenteIsolados {
+    not some u: Usuario, r: u.acessa |
+        r.organizacao.compoeUmSistema != u.PerteceASistema
+    
+    not some u: Usuario, r: u.participa |
+        r.organizacao.compoeUmSistema != u.PerteceASistema
 }
 
 
-run {
-    #Usuario >= 3         
-    #Dev >= 1           
-    #(Usuario - Dev) >= 1  
-    #Repositorio >= 5     
-    #Organizacao >= 2      
-    some d: Dev | some d.participa  // Algum Dev participa de pelo menos 1 repositorio
-} for 5 but 5 Organizacao
+
+pred exemplo {
+    #Usuario >= 3
+    #Repositorio >= 5
+    #Organizacao > 2
+    #Sistema > 2
+    some u: Usuario | no u.organizacao
+}
+
+run exemplo for 5
+check verificaLimiteParticipacao for 5
+check acessosDentroDaOrganizacao for 5
+check participacaoDentroDaOrganizacao for 5
+check sistemasCorretamenteIsolados for 5
 
