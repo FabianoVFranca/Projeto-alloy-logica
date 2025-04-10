@@ -63,14 +63,15 @@ pred devparticipaMaxCincoRepositorios[u: Usuario] {
 assert verificaLimiteAcessoDev {
 	all u: Usuario | devparticipaMaxCincoRepositorios[u]
 }
-// Verifica se todos Repositorios acessados pelo Usuario sao da sua Organizacao
-assert usuarioAcessaApenasRepositorioDeOrganizacao {
-    not some u: Usuario | some r: u.acessa | r.organizacao != u.organizacao
+//Verifica se nenhum Usuario acessa Repositorio de outra Organizacao
+assert usuarioNaoAcessaRepositorioDeOutraOrganizacao {
+	all u: Usuario | all r: u.acessa | r.organizacao = u.organizacao
 }
 // Verifica se todos os Usuarios trabalham apenas em Repositorios da sua Organização
 assert usuarioTrabalhaApenasRepositorioDeOrganizacao {
     not some u: Usuario | some r: u.trabalha | r.organizacao != u.organizacao
 }
+
 // Verifica se todos os Repositorios estao vinculados a uma Organizacao
 assert repositorioPossuiOrganizacao { 
 	not some r: Repositorio | no r.organizacao 
@@ -91,17 +92,6 @@ assert sistemasCorretamenteIsolados {
     not some u: Usuario, r: u.trabalha |
         r.organizacao.compoeUmSistema != u.perteceASistema
 }
-
-//Verifica se nenhum Usuario acessa Repositorio de outra Organizacao
-assert usuarioNaoAcessaRepositorioDeOutraOrganizacao {
-	all u: Usuario | all r: u.acessa | r.organizacao = u.organizacao
-}
-
-//Verifica se Usuarios que nao sao Devs nao tem Repositorios em trabalha
-assert somenteDevsTrabalham {
-	all u: Usuario - Dev | no r: Repositorio | r in no u.trabalha
-}
-
 
 pred exemplo {
     #Usuario >= 3
