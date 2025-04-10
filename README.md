@@ -7,8 +7,7 @@ Este projeto modela, utilizando Alloy, uma plataforma colaborativa para controle
 - Cada repositório pertence **exclusivamente** a uma organização.
 - Cada usuário pode pertencer a **uma única organização** ou a **nenhuma**.
 - Os usuários têm acesso **apenas aos repositórios** de sua própria organização.
-- `Dev` é é um tipo específico de `Usuário`.
-- Desenvolvedores (`Dev`) podem participar de **no máximo cinco repositórios** dentro de sua organização.
+- Desenvolvedores (`Usuários que trabalham`) podem participar de **no máximo cinco repositórios** dentro de sua organização.
 
 ## 👥 Integrantes do Grupo
 
