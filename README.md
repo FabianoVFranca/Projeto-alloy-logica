@@ -24,4 +24,6 @@ Este projeto modela, utilizando Alloy, uma plataforma colaborativa para controle
 **Período:** 2024.2  
 **Professor:** Tiago Lima Massoni
 
+## Visualização:
+
 ![image](https://github.com/user-attachments/assets/f8fb55e1-a03b-440d-875f-06b061662313)
